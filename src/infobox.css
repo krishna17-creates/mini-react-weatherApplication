@@ -1,0 +1,9 @@
+.cardinfo{
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+.card{
+    display: flex;
+    justify-content: center;
+}
