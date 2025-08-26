@@ -18,7 +18,7 @@ export default function SearchBox({ updatedInfo }) {
     const api_request = `${API_URL}q=${city}&appid=${API_KEY}&units=metric`;
     let response = await fetch(api_request);
     let jsonResponse = await response.json();
-
+    // console.log(jsonResponse);
     if (jsonResponse.cod === "404") {
       throw new Error("City not found");
     }
@@ -33,7 +33,6 @@ export default function SearchBox({ updatedInfo }) {
       country: jsonResponse.sys.country,
       description: jsonResponse.weather[0].description,
     };
-    console.log(resultRes)
     return resultRes;
 
   };
@@ -63,7 +62,7 @@ export default function SearchBox({ updatedInfo }) {
       <form onSubmit={handleSubmit}>
         <TextField
           id="cityname"
-          label="Enter City"
+          label="Enter Location"
           variant="standard"
           value={city}
           onChange={handleChange}

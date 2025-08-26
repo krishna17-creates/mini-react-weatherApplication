@@ -3,6 +3,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import SunnyIcon from '@mui/icons-material/Sunny';
 import "./infobox.css";
 
 export default function infobox({ info }) {
@@ -35,14 +38,21 @@ export default function infobox({ info }) {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {info.city}
+                {info.city}&nbsp;
+                {
+                info.humidity > 80
+                  ? <BeachAccessIcon/>
+                  : info.temperature > 25
+                  ? <SunnyIcon/>
+                  : <AcUnitIcon/>
+              }
               </Typography>
               <Typography
                 variant="body2"
                 sx={{ color: "text.secondary" }}
                 component={"span"}
               >
-                <p>Located in : {info.country}</p>
+                <p>Country : {info.country}</p>
                 <p>temperature : {info.temperature}</p>
                 <p>Min temp : {info.tempMin}</p>
                 <p>Max Temp : {info.tempMax}</p>
