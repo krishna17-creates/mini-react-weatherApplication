@@ -2,6 +2,10 @@
 
 This is a simple weather application built with React that allows users to search for the current weather conditions of any city. It displays information such as temperature, humidity, and a brief description of the weather.
 
+## Live Demo
+
+[View Live Demo](https://getweather-a.netlify.app/)
+
 ## Features
 
 - Search for weather by city name.
