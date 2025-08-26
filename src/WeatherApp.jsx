@@ -15,13 +15,13 @@ export default function WeatherApp(){
     description: "broken clouds",
     })
 
-    function updatededReport(result){
+    let updatedInfo = (result)=>{
         setReport(result);
     }
 
     return(
         <div style={{textAlign:"center"}}>
-        <SearchBox updatededReport={updatededReport}/>
+        <SearchBox updatedInfo={updatedInfo}/>
         <Infobox info={Report} />
         </div>
     )
