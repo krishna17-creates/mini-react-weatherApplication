@@ -22,7 +22,7 @@ export default function infobox({ info }) {
   return (
     <div className="cardinfo">
       <div className="card">
-        <Card sx={{ maxWidth: 370, width: "100%" }}>
+        <Card sx={{ maxWidth: 500, width: "100%" }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -67,6 +67,10 @@ export default function infobox({ info }) {
                 <p style={{ color: "red" }}>
                   *These values may not be accurate
                 </p>
+                <div className="travelTipBox">
+                  <p><b>Small AI Tip</b></p>
+                  <p><i>{info.aiSummary}</i></p>
+                </div>
               </Typography>
             </CardContent>
           </CardActionArea>

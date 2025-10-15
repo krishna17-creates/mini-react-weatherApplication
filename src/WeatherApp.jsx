@@ -13,6 +13,7 @@ export default function WeatherApp(){
     feelslike: "26",
     country: "IN",
     description: "broken clouds",
+    aiSummary : "Ai Generated Summary For travellers",
     })
 
     let updatedInfo = (result)=>{

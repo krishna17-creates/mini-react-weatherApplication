@@ -3,39 +3,15 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./SearchBox.css";
+import axios from 'axios';
 
 export default function SearchBox({ updatedInfo }) {
   let [city, setCity] = useState("");
   let [error, setError] = useState(false);
-  //    this api was taken from
-  //    https://openweathermap.org/current
   let [isLoading, setIsLoading] = useState(false);
-  const API_URL = "https://api.openweathermap.org/data/2.5/weather?";
-  const API_KEY = "1effaee869039e6af440713fad1a875c";
 
-  // metric is used so that all the data will be degree or in convinicence to understand
-  let getWeatherInfo = async () => {
-    const api_request = `${API_URL}q=${city}&appid=${API_KEY}&units=metric`;
-    let response = await fetch(api_request);
-    let jsonResponse = await response.json();
-    // console.log(jsonResponse);
-    if (jsonResponse.cod === "404") {
-      throw new Error("City not found");
-    }
-
-    let resultRes = {
-      city: jsonResponse.name,
-      temperature: jsonResponse.main.temp,
-      tempMin: jsonResponse.main.temp_min,
-      tempMax: jsonResponse.main.temp_max,
-      humidity: jsonResponse.main.humidity,
-      feelslike: jsonResponse.main.feels_like,
-      country: jsonResponse.sys.country,
-      description: jsonResponse.weather[0].description,
-    };
-    return resultRes;
-
-  };
+  // The ONLY URL we need now is our backend's URL
+  const API_URL = "http://localhost:3001/api/get-weather";
 
   function handleChange(e) {
     setCity(e.target.value);
@@ -46,10 +22,16 @@ export default function SearchBox({ updatedInfo }) {
     try {
       setIsLoading(true);
       setError(false);
-      let info = await getWeatherInfo();
-      updatedInfo(info);
+
+      // We only make ONE call to our secure backend now
+      const response = await axios.post(API_URL, { city: city });
+
+      // The response.data already contains EVERYTHING (weather + AI summary)
+      updatedInfo(response.data);
       setCity("");
+
     } catch (err) {
+      console.error(err);
       setError(true);
     } finally {
       setIsLoading(false);
@@ -69,7 +51,7 @@ export default function SearchBox({ updatedInfo }) {
           required
           disabled={isLoading}
           error={error}
-          helperText={error ? "No such place exists! or There was no info about that city in our API" : ""}
+          helperText={error ? "No such place exists!" : ""}
         />
         <br />
         <br />
